@@ -1,0 +1,27 @@
+name: System Info
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  sysinfo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Версия ядра
+        run: uname -a
+
+      - name: Информация об ОС
+        run: cat /etc/os-release
+
+      - name: Текущий пользователь
+        run: whoami
+
+      - name: Рабочая директория
+        run: pwd
+
+      - name: Переменные GitHub
+        run: |
+          echo "Актор: ${{ github.actor }}"
+          echo "Репозиторий: ${{ github.repository }}"

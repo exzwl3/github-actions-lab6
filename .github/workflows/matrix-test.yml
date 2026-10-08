@@ -1,0 +1,27 @@
+name: Matrix Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v4
+
+      - name: Версия Python
+        run: python --version
+
+      - name: Системная информация (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: uname -a
+
+      - name: Системная информация (Windows)
+        if: runner.os == 'Windows'
+        run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"

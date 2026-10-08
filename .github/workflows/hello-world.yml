@@ -1,0 +1,12 @@
+name: Hello World CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Приветствие
+        run: echo "Hello World from exzwl3!"

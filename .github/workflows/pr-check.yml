@@ -1,0 +1,22 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v4
+
+      - name: Проверка наличия README.md
+        run: test -f README.md
+
+      - name: Проверка наличия scripts/build.sh
+        run: test -f scripts/build.sh
+
+      - name: Сообщение об ошибке
+        if: failure()
+        run: echo "❌ Проверка не пройдена! Отсутствует один из ключевых файлов."

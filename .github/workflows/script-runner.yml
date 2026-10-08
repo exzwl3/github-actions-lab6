@@ -1,0 +1,22 @@
+name: Script Runner
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v4
+
+      - name: Дать права на исполнение
+        run: chmod +x scripts/build.sh
+
+      - name: Запуск скрипта
+        run: ./scripts/build.sh
+
+      - name: Показать build_info.txt
+        run: cat build_info.txt
